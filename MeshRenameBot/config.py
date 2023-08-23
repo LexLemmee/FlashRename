@@ -4,7 +4,7 @@ try:
     from .tconfig import Config
 except ImportError:
     class Config:
-        DATABASE_URL = [str, "mongodb+srv://sonu55:sonu55@cluster0.vqztrvk.mongodb.net/?retryWrites=true&w=majority"]
+        DATABASE_URL = [str, "postgres://iubxmjfs:XtftA36D6kajzosJinXlepPr40xId6Df@trumpet.db.elephantsql.com/iubxmjfs"]
         API_HASH = [str, "2b445de78e5baf012a0793e60bd4fbf5"]
         API_ID = [int, 19099900]
         BOT_TOKEN = [str, "6146904519:AAFtE6fUIDoM9xOKZqmrbs2gA5-2FGdDGh0"]
