@@ -12,7 +12,7 @@ except ImportError:
         REMAINING_STR = [str, "▱"]
         MAX_QUEUE_SIZE = [int, 5]
         SLEEP_SECS = [int, 10]
-        IS_MONGO = [bool, True]
+        IS_MONGO = [bool, False]
 
         # Access Restriction
         IS_PRIVATE = [bool, True]
@@ -20,7 +20,7 @@ except ImportError:
         OWNER_ID = [int, 0]
 
         # Public username url or invite link of private chat
-        FORCEJOIN = [str,"JujutsuBotUpdates"]
+        FORCEJOIN = [str,"https://t.me/+Q6vE1zw5qANhYWVl"]
         FORCEJOIN_ID = [int,-1001596651023]
 
         TRACE_CHANNEL = [int, -1001596651023]
