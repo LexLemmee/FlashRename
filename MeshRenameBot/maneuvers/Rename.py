@@ -4,7 +4,7 @@ import asyncio
 import time
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
-from pyrogram import Client, InlineKeyboardButton, InlineKeyboardMarkup, Message
+from pyrogram import Client, Message
 from ..translations.trans import Trans
 from ..core.get_config import get_var
 from ..maneuvers.ExecutorManager import ExecutorManager
