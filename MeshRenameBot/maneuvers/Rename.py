@@ -1,30 +1,24 @@
-from MeshRenameBot.database.user_db import UserDB
-from pyrogram.types.messages_and_media.message_entity import MessageEntity
-from .Default import DefaultManeuver
-from pyrogram import Client, StopTransmission
-from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
-import logging
-import time
-import asyncio
 import os
-from ..utils.progress_for_pyro import progress_for_pyrogram
-from ..core.get_config import get_var
-from ..maneuvers.ExecutorManager import ExecutorManager
-from ..utils.c_filter import FilterUtils
-from pyrogram.file_id import FileId
-from ..translations.trans import Trans
-from ..core.thumb_manage import get_thumbnail
+import logging
+import asyncio
+import time
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
-# Diff File
+from pyrogram import Client, InlineKeyboardButton, InlineKeyboardMarkup, Message
+from ..translations.trans import Trans
+from ..core.get_config import get_var
+from ..maneuvers.ExecutorManager import ExecutorManager
+from ..core.thumb_manage import get_thumbnail
+from pyrogram.file_id import FileId
+from pyrogram.dispatcher import StopTransmission
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
-renamelog = logging.getLogger(__name__)
-
+renamelog = logging.getLogger(__name)
 
 class RenameManeuver(DefaultManeuver):
     def __init__(self, client: Client, media_message: Message, cmd_message: Message) -> None:
         super().__init__(client, media_message, cmd_message)
-        self._unique_id = int(str(cmd_message.chat.id) + str(cmd_message.message_id))
+        self._unique_id = int(str(cmd_message.chat.id) + str(cmd_message.message_id)
         self._fltr_obj = FilterUtils(cmd_message.from_user.id)
 
     async def execute(self) -> None:
@@ -173,7 +167,7 @@ class RenameManeuver(DefaultManeuver):
                         if metadata.has("duration"):
                             duration = metadata.get('duration').seconds
                     
-                    if metadata.has("author"):
+                    if metadata has("author"):
                         perfo = metadata.get('author')
                 except:
                     duration = 0
@@ -273,8 +267,6 @@ class RenameManeuver(DefaultManeuver):
         rem_this(thumb_path)
         rem_this(ndl_path)
         rem_this(dl_path)
-        
-        
 
 def rem_this(path):
     try:
