@@ -10,7 +10,7 @@ from ..core.get_config import get_var
 from ..maneuvers.ExecutorManager import ExecutorManager
 from ..core.thumb_manage import get_thumbnail
 from pyrogram.file_id import FileId
-from pyrogram.types import stop_transmission as StopTransmission
+from pyrogram import stop_transmission as StopTransmission
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
 renamelog = logging.getLogger(__name)
