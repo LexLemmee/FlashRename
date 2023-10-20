@@ -20,10 +20,10 @@ except ImportError:
         OWNER_ID = [int, 0]
 
         # Public username url or invite link of private chat
-        FORCEJOIN = [str,"https://t.me/+Q6vE1zw5qANhYWVl"]
-        FORCEJOIN_ID = [int,-1002115636462]
+        FORCEJOIN = [str,"-1002058050288"]
+        FORCEJOIN_ID = [int,-1002058050288]
 
-        TRACE_CHANNEL = [int, -1002115636462]
+        TRACE_CHANNEL = [int, -1002058050288]
 
 try:
     from .tconfig import Commands
