@@ -4,14 +4,14 @@ import asyncio
 import time
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
-from pyrogram import Client, Message
+from pyrogram import Client
 from ..translations.trans import Trans
 from ..core.get_config import get_var
 from ..maneuvers.ExecutorManager import ExecutorManager
 from ..core.thumb_manage import get_thumbnail
 from pyrogram.file_id import FileId
 from pyrogram.dispatcher import StopTransmission
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
 renamelog = logging.getLogger(__name)
 
