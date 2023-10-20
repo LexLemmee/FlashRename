@@ -20,7 +20,7 @@ except ImportError:
         OWNER_ID = [int, 0]
 
         # Public username url or invite link of private chat
-        FORCEJOIN = [str,"-1002058050288"]
+        FORCEJOIN = [str,"https://t.me/illuminatiXNetwork"]
         FORCEJOIN_ID = [int,-1002058050288]
 
         TRACE_CHANNEL = [int, -1002058050288]
