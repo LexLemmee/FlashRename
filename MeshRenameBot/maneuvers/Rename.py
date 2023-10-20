@@ -12,7 +12,7 @@ from ..core.thumb_manage import get_thumbnail
 from pyrogram.file_id import FileId
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
-renamelog = logging.getLogger(__name)
+renamelog = logging.getLogger(__name__)
 
 class RenameManeuver(DefaultManeuver):
     def __init__(self, client: Client, media_message: Message, cmd_message: Message) -> None:
