@@ -7,7 +7,7 @@ except ImportError:
         DATABASE_URL = [str, "postgres://iubxmjfs:XtftA36D6kajzosJinXlepPr40xId6Df@trumpet.db.elephantsql.com/iubxmjfs"]
         API_HASH = [str, "2b445de78e5baf012a0793e60bd4fbf5"]
         API_ID = [int, 19099900]
-        BOT_TOKEN = [str, "6469081756:AAHstqMdBk5PjbfjcXZ1y5bptZqKBqhe-nU"]
+        BOT_TOKEN = [str, "6295293651:AAEMIVNFEgMwiuzPEoWLRU9arF9kbPzOrA0"]
         COMPLETED_STR = [str, "▰"]
         REMAINING_STR = [str, "▱"]
         MAX_QUEUE_SIZE = [int, 5]
@@ -15,8 +15,8 @@ except ImportError:
         IS_MONGO = [bool, False]
 
         # Access Restriction
-        IS_PRIVATE = [bool, True]
-        AUTH_USERS = [list,[778393824, 6265459491, 6198858059, 6368899212]]
+        IS_PRIVATE = [bool, False]
+        AUTH_USERS = [list,[778393824, 6295293651, 6198858059, 6368899212]]
         OWNER_ID = [int, 0]
 
         # Public username url or invite link of private chat
