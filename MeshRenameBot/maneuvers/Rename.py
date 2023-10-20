@@ -1,16 +1,21 @@
-import os
+from MeshRenameBot.database.user_db import UserDB
+from pyrogram.types.messages_and_media.message_entity import MessageEntity
+from .Default import DefaultManeuver
+from pyrogram import Client, StopTransmission
+from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 import logging
-import asyncio
 import time
-from hachoir.metadata import extractMetadata
-from hachoir.parser import createParser
-from pyrogram import Client
-from ..translations.trans import Trans
+import asyncio
+import os
+from ..utils.progress_for_pyro import progress_for_pyrogram
 from ..core.get_config import get_var
 from ..maneuvers.ExecutorManager import ExecutorManager
-from ..core.thumb_manage import get_thumbnail
+from ..utils.c_filter import FilterUtils
 from pyrogram.file_id import FileId
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
+from ..translations.trans import Trans
+from ..core.thumb_manage import get_thumbnail
+from hachoir.metadata import extractMetadata
+from hachoir.parser import createParser
 
 renamelog = logging.getLogger(__name__)
 
