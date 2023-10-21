@@ -172,7 +172,7 @@ class RenameManeuver(DefaultManeuver):
                         if metadata.has("duration"):
                             duration = metadata.get('duration').seconds
                     
-                    if metadata has "author":
+                    if "author" in metadata:
                         perfo = metadata.get('author')
                 except:
                     duration = 0
