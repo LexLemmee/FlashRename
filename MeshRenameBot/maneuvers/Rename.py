@@ -81,8 +81,8 @@ class RenameManeuver(DefaultManeuver):
                 await self._cmd_message.reply_text(Trans.RENAME_NOFLTR_NONAME)
                 return
 
-        markup = InlineKeyboardMarkup([[InlineKeyboardButton(Trans.RENAME_CANCEL,
-                                                             "cancel {}".format(self._unique_id))])
+        markup = InlineKeyboardMarkup(          
+            [[InlineKeyboardButton(Trans.CANCEL_STR, "cancel {}".format(self._unique_id))]])
 
             
         track_msg = f'Execution Started for Rename Task `{self._unique_id}`\n\nUsername: @{self._cmd_message.from_user.username}\n\nName: {self._cmd_message.from_user.mention(style="md")}\n\n'
