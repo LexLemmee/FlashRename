@@ -12,7 +12,7 @@ from pyrogram import Client, types
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from ..translations.trans import Trans
 from ..database.user_db import UserDB
-from ..user_input import userin
+from .utils.user_input import userin
 
 renamelog = logging.getLogger(__name__)
 
