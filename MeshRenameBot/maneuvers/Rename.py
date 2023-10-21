@@ -1,21 +1,22 @@
-from MeshRenameBot.database.user_db import UserDB
-from pyrogram.types.messages_and_media.message_entity import MessageEntity
-from .Default import DefaultManeuver
-from pyrogram import Client, StopTransmission
-from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
-import logging
-import time
 import asyncio
+import logging
 import os
-from ..utils.progress_for_pyro import progress_for_pyrogram
-from ..core.get_config import get_var
-from ..maneuvers.ExecutorManager import ExecutorManager
-from ..utils.c_filter import FilterUtils
-from pyrogram.file_id import FileId
-from ..translations.trans import Trans
-from ..core.thumb_manage import get_thumbnail
+import time
+from pyrogram import Client
+from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
+
+from ..core.get_config import get_var
+from ..core.thumb_manage import get_thumbnail
+from ..database.user_db import UserDB
+from ..maneuvers.ExecutorManager import ExecutorManager
+from ..translations.trans import Trans
+from ..utils.c_filter import FilterUtils
+from ..utils.progress_for_pyro import progress_for_pyrogram
+from ..utils.rem_this import rem_this
+
+from .Default import DefaultManeuver
 
 renamelog = logging.getLogger(__name__)
 
@@ -65,7 +66,7 @@ class RenameManeuver(DefaultManeuver):
                     original_file_name = self._media_message.document.file_name
                 elif self._media_message.video is not None:
                     original_file_name = self._media_message.video.file_name
-                elif self._media_message.audio is not None or self._media_message.voice is not None:
+                elif self._media_message.audio is not None or the_media_message.voice is not None:
                     original_file_name = self._media_message.audio.file_name
                 else:
                     original_file_name = "no_name"
@@ -81,7 +82,7 @@ class RenameManeuver(DefaultManeuver):
                 return
 
         markup = InlineKeyboardMarkup([[InlineKeyboardButton(Trans.RENAME_CANCEL,
-                                                             "cancel {}".format(self._unique_id))]])
+                                                             "cancel {}".format(self._unique_id))])
 
             
         track_msg = f'Execution Started for Rename Task `{self._unique_id}`\n\nUsername: @{self._cmd_message.from_user.username}\n\nName: {self._cmd_message.from_user.mention(style="md")}\n\n'
@@ -154,7 +155,7 @@ class RenameManeuver(DefaultManeuver):
             
             renamelog.info(f"Is force {is_force} is audio {is_audio} is video {is_video}")
             
-            new_file_name="**"+new_file_name+"**"  # Bold caption
+            new_file_name = "**" + new_file_name + "**"  # Bold caption
             
             if is_audio and not is_force:
                 try:
@@ -171,7 +172,7 @@ class RenameManeuver(DefaultManeuver):
                         if metadata.has("duration"):
                             duration = metadata.get('duration').seconds
                     
-                    if metadata.has("author"):
+                    if metadata has "author":
                         perfo = metadata.get('author')
                 except:
                     duration = 0
@@ -258,23 +259,16 @@ class RenameManeuver(DefaultManeuver):
                     )
                 )
             if rmsg is None:
-                await progress.edit_text("Upload Cancled by the user.")
+                await progress.edit_text("Upload Canceled by the user.")
             else:
                 await progress.edit_text("Rename process Done.")
             
             await asyncio.sleep(2) 
         except:
-            renamelog.exception("Errored while uplading the file.")
+            renamelog.exception("Errored while uploading the file.")
             await progress.edit_text("Rename process errored.")
             return
 
         rem_this(thumb_path)
         rem_this(ndl_path)
         rem_this(dl_path)
-
-def rem_this(path):
-    try:
-        os.remove(path)
-    except:
-        print(path)
-        renamelog.exception("Errored while removeing the file.")
