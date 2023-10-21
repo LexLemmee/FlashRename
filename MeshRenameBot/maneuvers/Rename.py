@@ -14,7 +14,7 @@ from ..maneuvers.ExecutorManager import ExecutorManager
 from ..translations.trans import Trans
 from ..utils.c_filter import FilterUtils
 from ..utils.progress_for_pyro import progress_for_pyrogram
-from ..utils.rem_this import rem_this
+#from ..utils.rem_this import rem_this
 
 from .Default import DefaultManeuver
 
