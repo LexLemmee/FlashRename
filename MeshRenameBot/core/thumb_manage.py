@@ -78,7 +78,7 @@ async def resize_img(path, width=None, height=None):
     img = Image.open(path)
     wei, hei = img.size
 
-    wei = width if width is not not None else wei
+    wei = width if width is not None else wei
     hei = height if height is not None else hei
 
     img.thumbnail((wei, hei))
