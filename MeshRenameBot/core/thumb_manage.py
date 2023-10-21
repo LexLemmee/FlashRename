@@ -13,20 +13,20 @@ from ..database.user_db import UserDB
 from hachoir.parser import createParser
 from hachoir.metadata import extractMetadata
 
-#TODO trans pending
+# TODO: Add translations for messages
 
 renamelog = logging.getLogger(__name__)
 
 async def adjust_image(path: str) -> Union[str, None]:
     try:
         im = Image.open(path)
-        im.convert("RGB").save(path,"JPEG")
+        im.convert("RGB").save(path, "JPEG")
         im = Image.open(path)
-        im.thumbnail((320,320), Image.ANTIALIAS)
-        im.save(path,"JPEG")
+        im.thumbnail((320, 320), Image.ANTIALIAS)
+        im.save(path, "JPEG")
         return path
     except Exception:
-        return
+        return None
 
 async def handle_set_thumb(client, msg):
     original_message = msg.reply_to_message
@@ -37,12 +37,11 @@ async def handle_set_thumb(client, msg):
             with open(path, "rb") as file_handle:
                 data = file_handle.read()
                 UserDB().set_thumbnail(data, msg.from_user.id)
-            
+
             os.remove(path)
-            await msg.reply_text("Thumbnail set success.", quote=True)
+            await msg.reply_text("Thumbnail set successfully.", quote=True)
         else:
             await msg.reply_text("Reply to an image to set it as a thumbnail.", quote=True)
-
     else:
         await msg.reply_text("Reply to an image to set it as a thumbnail.", quote=True)
 
@@ -54,15 +53,13 @@ async def handle_get_thumb(client, msg):
         await msg.reply_photo(thumb_path, quote=True)
         os.remove(thumb_path)
 
-
 async def gen_ss(filepath, ts, opfilepath=None):
-    # todo check the error pipe and do processing 
     source = filepath
     destination = os.path.dirname(source)
-    ss_name =  str(os.path.basename(source)) + "_" + str(round(time.time())) + ".jpg"
-    ss_path = os.path.join(destination,ss_name)
+    ss_name = str(os.path.basename(source)) + "_" + str(round(time.time())) + ".jpg"
+    ss_path = os.path.join(destination, ss_name)
 
-    cmd = ["ffmpeg","-loglevel","error","-ss",str(ts),"-i",str(source),"-vframes","1","-q:v","2",str(ss_path)]
+    cmd = ["ffmpeg", "-loglevel", "error", "-ss", str(ts), "-i", str(source), "-vframes", "1", "-q:v", "2", str(ss_path)
 
     subpr = await asyncio.create_subprocess_exec(
         *cmd,
@@ -72,26 +69,23 @@ async def gen_ss(filepath, ts, opfilepath=None):
     spipe, epipe = await subpr.communicate()
     epipe = epipe.decode().strip()
     spipe = spipe.decode().strip()
-    renamelog.info("Stdout Pipe :- {}".format(spipe))
-    renamelog.info("Error Pipe :- {}".format(epipe))
+    renamelog.info("Stdout Pipe: {}".format(spipe))
+    renamelog.info("Error Pipe: {}".format(epipe))
 
     return ss_path
 
-async def resize_img(path,width=None,height=None):
+async def resize_img(path, width=None, height=None):
     img = Image.open(path)
-    wei,hei = img.size
+    wei, hei = img.size
 
-    wei = width if width is not None else wei
+    wei = width if width is not not None else wei
     hei = height if height is not None else hei
 
-    img.thumbnail((wei,hei))
-    
-    img.save(path,"JPEG")
+    img.thumbnail((wei, hei))
+    img.save(path, "JPEG")
     return path
 
-
-async def get_thumbnail(file_path, user_id = None, force_docs = False):
-    print(file_path, "-", user_id, "-", force_docs)
+async def get_thumbnail(file_path, user_id=None, force_docs=False):
     metadata = extractMetadata(createParser(file_path))
     try:
         duration = metadata.get("duration")
@@ -109,16 +103,15 @@ async def get_thumbnail(file_path, user_id = None, force_docs = False):
             if user_thumb is not False:
                 return user_thumb
             else:
-                path = await gen_ss(file_path,random.randint(2,duration.seconds))
-                path = await resize_img(path,320)
+                path = await gen_ss(file_path, random.randint(2, duration.seconds))
+                path = await resize_img(path, 320)
                 return path
-
     else:
         if force_docs:
             return None
-        
-        path = await gen_ss(file_path,random.randint(2,duration.seconds))
-        path = await resize_img(path,320)
+
+        path = await gen_ss(file_path, random.randint(2, duration.seconds))
+        path = await resize_img(path, 320)
         return path
 
 async def handle_clr_thumb(client, msg):
