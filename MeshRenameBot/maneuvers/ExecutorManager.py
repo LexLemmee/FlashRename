@@ -3,7 +3,6 @@ from ..core.get_config import get_var
 from .Executor import Executor
 from .Default import DefaultManeuver
 
-
 class ExecutorManager:
     maneuvers_queue = asyncio.Queue(maxsize=0)
     all_maneuvers_log = []
@@ -20,8 +19,8 @@ class ExecutorManager:
                 self.active_executors.append(Executor(self.maneuvers_queue, i))
 
     def close_executors(self) -> None:
-        for i in self.active_executors:
-            i.stop()
+        for executor in self.active_executors:
+            executor.stop()
 
     async def create_maneuver(self, maneuver: DefaultManeuver) -> None:
         await self.maneuvers_queue.put(maneuver)
